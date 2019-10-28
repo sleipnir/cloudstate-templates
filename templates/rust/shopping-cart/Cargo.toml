@@ -1,0 +1,9 @@
+[package]
+name = "{application-name}"
+version = "{application-version}"
+authors = ["root"]
+
+[dependencies]
+log = "0.4.8"
+log4rs = "0.8.3"
+cloudstate = "0.0.1"
