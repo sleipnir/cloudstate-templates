@@ -10,6 +10,8 @@
     <packaging>jar</packaging>
 
     <properties>
+        <repo.name>{repo}</repo.name>
+        <tag.version>{tag}</tag.version>
         <cloudstate.version>0.4.3</cloudstate.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -58,44 +60,30 @@
                 </executions>
             </plugin>
 
-            <!--
-                             <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.26.1</version>
+           <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>1.7.0</version>
                 <configuration>
-                    <images>
-                        <image>
-                            <build>
-                                <name>my-dockerhub-username/my-stateful-service:%l</name>
-                                <from>adoptopenjdk/11-jre-hotspot</from>
-                                <tags>
-                                    <tag>latest</tag>
-                                </tags>
-                                <assembly>
-                                    <descriptorRef>artifact-with-dependencies</descriptorRef>
-                                </assembly>
-                                <entryPoint>
-                                    <arg>java</arg>
-                                    <arg>-cp</arg>
-                                    <arg>/maven/*</arg>
-                                    <arg>com.example.ShoppingCartMain</arg>
-                                </entryPoint>
-                            </build>
-                        </image>
-                    </images>
+                    <mainClass>com.example.ShoppingCartMain</mainClass>
+                    <to>
+                        <image>${repo.name}</image>
+                        <credHelper></credHelper>
+                        <tags>
+                            <tag>${tag.version}</tag>
+                        </tags>
+                    </to>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-XX:+UseG1GC</jvmFlag>
+                            <jvmFlag>-XX:+UseStringDeduplication</jvmFlag>
+                        </jvmFlags>
+                        <ports>
+                            <port>8088</port>
+                        </ports>
+                    </container>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>build-docker-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
-            -->
 
         </plugins>
     </build>
