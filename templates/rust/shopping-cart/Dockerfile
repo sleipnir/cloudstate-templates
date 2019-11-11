@@ -3,7 +3,7 @@
 # Cargo Build Stage
 # ------------------------------------------------------------------------------
 #ARG BASE_IMAGE=ekidd/rust-musl-builder:latest
-ARG BASE_IMAGE=ekidd/rust-musl-builder:nightly-2019-11-06
+ARG BASE_IMAGE=ekidd/rust-musl-builder:stable
 
 # Our first FROM statement declares the build environment.
 FROM ${BASE_IMAGE} AS cargo-build
