@@ -1,9 +1,12 @@
 FROM golang:1.13.0-stretch AS builder
 
 ENV GO111MODULE=on \
-    CGO_ENABLED=1
+    CGO_ENABLED=0
 
 WORKDIR /build
+
+# Install upx package
+RUN apt-get update && apt-get install -y upx-ucl
 
 # Let's cache modules retrieval - those don't change so often
 COPY go.mod .
@@ -15,7 +18,7 @@ RUN go mod download
 COPY . .
 
 # Build the application
-RUN go build .
+RUN go build -ldflags="-s -w" . && upx --ultra-brute {application-name}
 
 # Let's create a /dist folder containing just the files necessary for runtime.
 # Later, it will be copied as the / (root) of the output image.
