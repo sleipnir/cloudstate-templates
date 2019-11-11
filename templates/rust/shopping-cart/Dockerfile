@@ -8,7 +8,7 @@ ARG BASE_IMAGE=ekidd/rust-musl-builder:nightly-2019-11-06
 # Our first FROM statement declares the build environment.
 FROM ${BASE_IMAGE} AS cargo-build
 
-RUN sudo apt-get update && sudo apt-get install -y upx-ucl zip unzip
+RUN sudo apt-get update && sudo apt-get install -y upx-ucl unzip
 
 # Install protobuf
 # Make sure you grab the latest version
