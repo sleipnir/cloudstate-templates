@@ -9,7 +9,7 @@ use cloudstate::serveless::{CloudState, EntityService};
 fn main() {
 
     // CloudState depends of log4rs to print messages
-    log4rs::init_file("config/log4rs.yml", Default::default()).unwrap();
+    log4rs::init_file(env!("LOG_CONFIG_FILE_PATH"), Default::default()).unwrap();
     info!("Starting CloudState Server...");
 
     let service = EntityService::new()

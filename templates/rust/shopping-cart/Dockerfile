@@ -23,12 +23,6 @@ RUN sudo mv protoc3/bin/* /usr/local/bin/
 # Move protoc3/include to /usr/local/include/
 RUN sudo mv protoc3/include/* /usr/local/include/
 
-RUN protoc --version
-
-# Optional: change owner
-#RUN sudo chown [user] /usr/local/bin/protoc
-#RUN sudo chown -R [user] /usr/local/include/google
-
 # Add our source code.
 ADD . ./
 
@@ -45,6 +39,8 @@ RUN /usr/bin/upx --brute /home/rust/src/target/x86_64-unknown-linux-musl/release
 # Final Stage
 # -------------------- ----------------------------------------------------------
 FROM scratch
+ADD config /tmp/cloudstate
+ENV LOG_CONFIG_FILE_PATH /tmp/cloudstate/config/log4rs.yml
 COPY --from=cargo-build /home/rust/src/target/x86_64-unknown-linux-musl/release/{application-name} \
     /usr/local/bin/
 
