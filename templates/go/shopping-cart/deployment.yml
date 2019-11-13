@@ -11,6 +11,8 @@ apiVersion: cloudstate.io/v1alpha1
 kind: StatefulService
 metadata:
   name: {application-name}
+  labels:
+    user-container: {application-name}
 spec:
   datastore:
     name: inmemory

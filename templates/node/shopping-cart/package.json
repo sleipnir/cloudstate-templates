@@ -26,8 +26,7 @@
   "dependencies": {
     "@grpc/proto-loader": "^0.1.0",
     "google-protobuf": "^3.0.0",
-    "grpc": "^1.20.2",
-    "cloudstate": "file:../../node-support"
+    "grpc": "^1.20.2"
   },
   "devDependencies": {
     "chai": "4.2.0",
@@ -35,11 +34,11 @@
   },
   "scripts": {
     "test": "mocha",
-    "prestart": "compile-descriptor ../../protocols/example/shoppingcart/shoppingcart.proto",
-    "pretest": "compile-descriptor ../../protocols/example/shoppingcart/shoppingcart.proto",
+    "prestart": "compile-descriptor protos/shoppingcart.proto",
+    "pretest": "compile-descriptor protos/shoppingcart.proto",
     "start": "node index.js",
     "start-no-prestart": "node index.js",
-    "dockerbuild": "docker build -f ../../Dockerfile.js-shopping-cart -t ${DOCKER_PUBLISH_TO:-cloudstateio}/js-shopping-cart:latest ../..",
+    "dockerbuild": "docker build -f Dockerfile -t ${DOCKER_PUBLISH_TO:-cloudstateio}/js-shopping-cart:latest ../..",
     "dockerpush": "docker push ${DOCKER_PUBLISH_TO:-cloudstateio}/js-shopping-cart:latest",
     "dockerbuildpush": "npm run dockerbuild && npm run dockerpush"
   }
