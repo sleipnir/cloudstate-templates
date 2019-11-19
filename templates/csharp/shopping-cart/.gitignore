@@ -1,0 +1,6 @@
+# dotnet folders
+bin
+obj
+
+# Ignore .cs output from protoc
+shopping-cart/proto_dist
