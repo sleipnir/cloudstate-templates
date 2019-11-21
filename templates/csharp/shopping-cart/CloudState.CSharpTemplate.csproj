@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include="proto_files/frontend/**/*.proto;proto_files/example/**/*.proto" ProtoRoot="proto_files/frontend;proto_files/example" OutputDir="proto_dist" CompileOutputs="false" GrpcServices="None" />
+    <Protobuf Update="proto_files/example/shoppingcart/shoppingcart.proto" GrpcServices="Both" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- TODO: fix the .461 build warnings -->    
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Custom built library with a patched version of protobuf -->
+    <PackageReference Include="cloudstate.csharpsupport" Version="3.11.0-rc0.12" />
+    <!-- TODO: Add these to the nuget package -->
+    <PackageReference Include="Grpc.Core" Version="2.23.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.23.1" />
+    <PackageReference Include="Optional" Version="4.0.0" />
+    <PackageReference Include="Grpc.Reflection" Version="2.0.0.0" />
+  </ItemGroup>
+
+</Project>
