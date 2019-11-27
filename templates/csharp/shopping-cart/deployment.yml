@@ -1,0 +1,20 @@
+apiVersion: cloudstate.io/v1alpha1
+kind: StatefulStore
+metadata:
+  name: inmemory
+spec:
+  type: InMemory
+
+
+---
+apiVersion: cloudstate.io/v1alpha1
+kind: StatefulService
+metadata:
+  name: {application-name}
+  labels:
+    user-container: {application-name}
+spec:
+  datastore:
+    name: inmemory
+  containers:
+    - image: {image-name}:{tag}
